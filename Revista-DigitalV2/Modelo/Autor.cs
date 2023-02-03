@@ -38,6 +38,13 @@ namespace Revista_DigitalV2.Modelo
             get { return redSocial; }
             set { SetProperty(ref redSocial, value); }
         }
+        private int id;
+
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
         public Autor(string nombre, string nickname, string imagen, string red)
         {
             this.Nombre = nombre;

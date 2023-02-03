@@ -66,17 +66,23 @@ namespace Revista_DigitalV2.Modelo
             get { return seccion; }
             set { SetProperty(ref seccion, value); }
         }
+        private int id;
 
-        public Articulo(Autor autor, string titulo, string cuerpo, string imagen, string seccion)
+        public int Id
         {
-            Autor = autor.Nombre;
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
+        public Articulo(string autor, string titulo, string cuerpo, string imagen, string seccion)
+        {
+            Autor = autor;
             Titulo = titulo;
             Cuerpo = cuerpo;
             Imagen = imagen;
             Seccion = seccion;
             //Nickname = Autor.Nickname (Cuando la clase autor esté creada)
-            Nickname = autor.Nickname;
-            URL = String.Empty;
+            Nickname = autor;
         }
 
 

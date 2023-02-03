@@ -92,23 +92,22 @@ namespace Revista_DigitalV2.Vista_Modelo
             get { return autorSeleccionado; }
             set { SetProperty(ref autorSeleccionado, value); }
         }
-        private GestionarAutorService gestionarAutorService;
+        private DatabaseService database;
         private DialogoService dialogoService;
         private ServicioCreacionArticulo servicioArticulo;
-        private DatabaseService databaseService;
         public AutorVM()
         {
             Redes = new ObservableCollection<string>();
             Redes.Add("Instagram");
             Redes.Add("Twitter");
             Redes.Add("Facebook");
-            
+
             SelectImagenCommand = new RelayCommand(SeleccionarImagenAutor);
             GuardarAutorCommand = new RelayCommand(GuardarAutor);
             EditarAutorCommand = new RelayCommand(EditarAutor);
             EliminarAutorCommand = new RelayCommand(EliminarAutor);
-            databaseService = new DatabaseService();
-            gestionarAutorService = new GestionarAutorService();
+
+            database = new DatabaseService();
             dialogoService = new DialogoService();
             servicioArticulo = new ServicioCreacionArticulo();
         }
@@ -118,7 +117,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             if (dialogoService.DialogoEliminar())
             {
                 Autor autor = AutorSeleccionado;
-                gestionarAutorService.EliminarAutor(autor);
+                database.EliminarAutor(autor);
             }
         }
 
@@ -138,7 +137,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         public void GuardarAutor()
         {
             Autor autor = new Autor(NombreCrear, NicknameCrear, ImagenSeleccionadaPorUsuario, RedSeleccionada);
-            gestionarAutorService.GuardarAutor(autor);
+            database.CrearAutor(autor);
         }
     }
 }
