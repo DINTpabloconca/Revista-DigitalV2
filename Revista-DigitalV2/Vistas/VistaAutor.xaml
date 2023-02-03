@@ -11,7 +11,7 @@
     <Window.Resources>
         <converter:RedsocialConverter x:Key="RedSocialConverter"/>
         <DataTemplate x:Key="plantillaGridAutores">
-            <Border BorderThickness="1" BorderBrush="Black">
+            <Border BorderThickness="1" BorderBrush="Black" Height="100" Width="100">
                 <DockPanel LastChildFill="False">
                     <Image DockPanel.Dock="Left" Source="{Binding Path=ImagenAutor}"></Image>
                     <TextBlock DockPanel.Dock="Top" Text="{Binding Path=NombreAutor}"></TextBlock>
@@ -43,7 +43,7 @@
             <ListBox Height="375" ItemsSource="{Binding Path=ListaAutores}" SelectedItem="{Binding Path=AutorSeleccionado}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Grid></Grid>
+                        <WrapPanel></WrapPanel>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>

@@ -110,6 +110,8 @@ namespace Revista_DigitalV2.Vista_Modelo
             database = new DatabaseService();
             dialogoService = new DialogoService();
             servicioArticulo = new ServicioCreacionArticulo();
+            ListaAutores = database.MostrarAutores();
+
         }
 
         private void EliminarAutor()
@@ -117,6 +119,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             if (dialogoService.DialogoEliminar())
             {
                 Autor autor = AutorSeleccionado;
+                ListaAutores.Remove(autor);
                 database.EliminarAutor(autor);
             }
         }
@@ -138,6 +141,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         {
             Autor autor = new Autor(NombreCrear, NicknameCrear, ImagenSeleccionadaPorUsuario, RedSeleccionada);
             database.CrearAutor(autor);
+            ListaAutores = database.MostrarAutores();
         }
     }
 }
