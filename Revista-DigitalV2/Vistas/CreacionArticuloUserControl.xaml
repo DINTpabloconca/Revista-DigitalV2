@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Revista_DigitalV2.Vistas.CreacionArticuloUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:editors="http://schemas.syncfusion.com/wpf"
+             xmlns:local="clr-namespace:Revista_DigitalV2.Vistas"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="LabelCenter">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="TextboxCenter">
+
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White" Height="500">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Crear Articulo" FontSize="30" HorizontalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"></TextBlock>
+        <Label Grid.Row="1" Grid.Column="0" Content="Título: " Style="{StaticResource LabelCenter}"/>
+        <inputLayout:SfTextInputLayout
+            ContainerType="Outlined"
+            Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+            Hint="Título">
+            <TextBox Text="{Binding Path=ArticuloCreado.Titulo}" Style="{StaticResource TextboxCenter}"></TextBox>
+        </inputLayout:SfTextInputLayout>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Sección: " Style="{StaticResource LabelCenter}"></Label>
+        <inputLayout:SfTextInputLayout
+            ContainerType="Outlined"
+            Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+            Hint="Seccion">
+            <TextBox Style="{StaticResource TextboxCenter}" Text="{Binding Path=ArticuloCreado.Seccion}"></TextBox>
+        </inputLayout:SfTextInputLayout>
+        <Label Grid.Row="3" Grid.Column="0" Content="Cuerpo: " Style="{StaticResource LabelCenter}"></Label>
+        <inputLayout:SfTextInputLayout
+            ContainerType="Outlined"
+            Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
+            Margin="0,0,5,0"
+            Hint="Cuerpo">
+            <TextBox Text="{Binding Path=ArticuloCreado.Cuerpo}" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="15" AcceptsReturn="True" Height="80"></TextBox>
+        </inputLayout:SfTextInputLayout>
+        <Label Grid.Row="5" Grid.Column="0" Content="Imagen: " Style="{StaticResource LabelCenter}"></Label>
+        <inputLayout:SfTextInputLayout
+            ContainerType="Outlined"
+            Grid.Row="5" Grid.Column="1"
+            Hint="Imagen">
+            <TextBox  Text="{Binding Path=ArticuloCreado.Imagen}" Style="{StaticResource TextboxCenter}"></TextBox>
+        </inputLayout:SfTextInputLayout>
+        <Button Grid.Column="2" Grid.Row="5" Margin="10" Width="100" Height="20" Content="Examinar" Command="{Binding Path=ExaminarImagenCommand}"></Button>
+
+
+        <Label Content="Autor: " Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelCenter}"></Label>
+        <!-- Para seleccionar el autor utilizar el Syncfusion
+        <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20" Width="100"  Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=ListaAutores}" DisplayMemberPath="Nombre" SelectedItem="{Binding Path=ArticuloCreado.Autor}"></ComboBox>
+-->
+        <inputLayout:SfTextInputLayout
+                ContainerType="Outlined"
+                Hint="Autor"
+                Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2">
+            <editors:SfTextBoxExt 
+                      SearchItemPath="Nombre"
+                      AutoCompleteMode="Suggest"
+                      AutoCompleteSource="{Binding Path=ListaAutores}" />
+        </inputLayout:SfTextInputLayout>
+        <StackPanel Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="Borrar"  Width="100" Height="20" Margin="5"  Command="{Binding Path=VaciarArticuloCommand}"></Button>
+            <Button Content="Publicar" Width="100" Height="20" Margin="5" Command="{Binding Path=AñadirArticuloCommand}"></Button>
+        </StackPanel>
+        <Button Grid.Row="7" Grid.Column="0" Content="Cancelar" Height="20" Margin="5"></Button>
+
+    </Grid>
+</UserControl>
