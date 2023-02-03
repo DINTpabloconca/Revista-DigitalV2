@@ -51,7 +51,7 @@ namespace Revista_DigitalV2.Servicios
             comando.Parameters["@imagen"].Value = autor.Imagen;
             comando.Parameters["@red_social"].Value = autor.RedSocial;
 
-            //comando.ExecuteNonQuery();
+            comando.ExecuteNonQuery();
         }
         public void CrearArticulo(Articulo articulo)
         {
