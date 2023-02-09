@@ -95,6 +95,8 @@ namespace Revista_DigitalV2.Vista_Modelo
         private DatabaseService database;
         private DialogoService dialogoService;
         private ServicioCreacionArticulo servicioArticulo;
+
+        private GestionAzureBlobService gestionAzureBlobService;
         public AutorVM()
         {
             Redes = new ObservableCollection<string>();
@@ -110,6 +112,8 @@ namespace Revista_DigitalV2.Vista_Modelo
             database = new DatabaseService();
             dialogoService = new DialogoService();
             servicioArticulo = new ServicioCreacionArticulo();
+            gestionAzureBlobService = new GestionAzureBlobService();
+
             ListaAutores = database.MostrarAutores();
 
         }
@@ -139,7 +143,8 @@ namespace Revista_DigitalV2.Vista_Modelo
         }
         public void GuardarAutor()
         {
-            Autor autor = new Autor(NombreCrear, NicknameCrear, ImagenSeleccionadaPorUsuario, RedSeleccionada);
+            string imagenAutor = gestionAzureBlobService.GuardarImagenAutor(ImagenSeleccionadaPorUsuario);
+            Autor autor = new Autor(NombreCrear, NicknameCrear, imagenAutor, RedSeleccionada);
             database.CrearAutor(autor);
             ListaAutores = database.MostrarAutores();
         }
