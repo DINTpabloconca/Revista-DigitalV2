@@ -81,7 +81,7 @@ namespace Revista_DigitalV2.Modelo
             Cuerpo = cuerpo;
             Imagen = imagen;
             Seccion = seccion;
-            Nickname = Autor.Nickname (Cuando la clase autor esté creada)
+            Nickname = Autor.Nickname;
 
         }
 
