@@ -18,9 +18,9 @@ namespace Revista_DigitalV2.Modelo
         }
 
 
-        private string autor;
+        private Autor autor;
 
-        public string Autor
+        public Autor Autor
         {
             get { return autor; }
             set { SetProperty(ref autor, value); }
