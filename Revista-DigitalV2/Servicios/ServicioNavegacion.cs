@@ -20,5 +20,11 @@ namespace Revista_DigitalV2.Servicios
             VistaAutor vistaAutor = new VistaAutor();
             return vistaAutor.ShowDialog();
         }
+
+        public bool? AbrirVistaArticulo()
+        {
+            VistaArticulo vistaArticulo = new VistaArticulo();
+            return vistaArticulo.ShowDialog();
+        }
     }
 }
