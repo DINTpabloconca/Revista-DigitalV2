@@ -120,15 +120,9 @@ namespace Revista_DigitalV2.Servicios
         public void EliminarAutor(Autor autor)
         {
             SqliteCommand comando = conexion.CreateCommand();
-            ObservableCollection<Autor> autores = MostrarAutores();
-            foreach (Autor autorFromList in autores)
-            {
-                if (autorFromList.Equals(autor))
-                {
-                    comando.CommandText = @"DELETE FROM Autor WHERE id =" + autor.Id;
-                    break;
-                }
-            }
+            comando.CommandText = @"DELETE FROM Autor WHERE id = " + autor.Id;
+
+
         }
         public void EliminarArticulo(Articulo articulo)
         {
