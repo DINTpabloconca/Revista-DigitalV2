@@ -52,14 +52,14 @@ namespace Revista_DigitalV2.Servicios
                         .Text(x =>
                         {
                             x.Span("Autor: ");
-                            x.Span(articuloModel.Autor);
+                            //x.Span(articuloModel.Autor);
                         });
                     page.Footer()
                         .AlignRight()
                         .Column(x =>
                         {
-                            x.Item().Image(articuloModel.Autor/*.redSocial*/);
-                            x.Item().Text(articuloModel.Autor/*.NickName*/);
+                            x.Item().Image(articuloModel.Autor.RedSocial);
+                            x.Item().Text(articuloModel.Autor.Nickname);
                         });
                 });
             })
