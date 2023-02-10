@@ -96,7 +96,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         private DialogoService dialogoService;
         private ServicioCreacionArticulo servicioArticulo;
 
-        private GestionAzureBlobService gestionAzureBlobService;
+        private GestionAzureBlobService gestionAzureBlobService; 
         public AutorVM()
         {
             Redes = new ObservableCollection<string>();
