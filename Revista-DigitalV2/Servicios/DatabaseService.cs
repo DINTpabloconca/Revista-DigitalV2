@@ -111,7 +111,7 @@ namespace Revista_DigitalV2.Servicios
                     string cuerpo = (string)lector["cuerpo"];
                     string imagen = (string)lector["imagen"];
                     string seccion = (string)lector["seccion"];
-                    //listaArticulos.Add(new Articulo(autor, titulo, cuerpo, imagen, seccion));
+//                    listaArticulos.Add(new Articulo(autor, titulo, cuerpo, imagen, seccion));
                 }
             }
             lector.Close();

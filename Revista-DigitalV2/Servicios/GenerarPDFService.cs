@@ -20,7 +20,7 @@ namespace Revista_DigitalV2.Servicios
             WebClient mywebClient = new WebClient();
             mywebClient.DownloadFile(articuloModel.Imagen, "downloadedImage.png");
 
-            byte[] imageData = File.ReadAllBytes("downloadedImage.png");
+            mywebClient.DownloadFile(articuloModel.Autor.Imagen, "AuthorDownloadedImage.png");
 
             Document.Create(container =>
             {
@@ -41,7 +41,7 @@ namespace Revista_DigitalV2.Servicios
                         {
                             x.Item().Text(articuloModel.Seccion).FontSize(25).SemiBold();
                             x.Spacing(20);
-                            x.Item().Image(imageData);
+                            x.Item().Image("downloadedImage.png");
                             x.Spacing(5);
                             x.Item().Text(articuloModel.Cuerpo);
                             
@@ -52,18 +52,18 @@ namespace Revista_DigitalV2.Servicios
                         .Text(x =>
                         {
                             x.Span("Autor: ");
-                            //x.Span(articuloModel.Autor);
+                            x.Span(articuloModel.Autor.Nombre);
                         });
                     page.Footer()
                         .AlignRight()
                         .Column(x =>
                         {
-                            x.Item().Image(articuloModel.Autor.RedSocial);
-                            x.Item().Text(articuloModel.Autor.Nickname);
+                            x.Item().Image("AuthorDownloadedImage.png");
+                            x.Item().Text("AuthorDownloadedImage.png");
                         });
                 });
             })
-            .GeneratePdf(articuloModel.Titulo+".pdf");
+            .GeneratePdf(articuloModel.Titulo + ".pdf");
         }        
     }
 }
