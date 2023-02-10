@@ -7,13 +7,23 @@
         xmlns:local="clr-namespace:Revista_DigitalV2.Vistas"
         mc:Ignorable="d"
         Title="VistaArticulo" Height="450" Width="1000">
-    <TabControl>
-        <TabItem Header="Editar Articulo">
-            
-        </TabItem>
-        <TabItem Header="Lista Articulos">
-            <syncfusion:SfDataGrid ItemsSource="{Binding Path=ListaArticulos}" />
-        </TabItem>
-        
-    </TabControl>
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="EliminarButton">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ArticuloSeleccionado}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <DockPanel DockPanel.Dock="Bottom" Margin="5" LastChildFill="False">
+            <Button DockPanel.Dock="Left" Content="Cancelar" IsCancel="True" Margin="5"></Button>
+            <Button DockPanel.Dock="Right" Content="Eliminar" Margin="5" Command="{Binding Path=EliminarArticuloCommand}" Style="{StaticResource EliminarButton}"></Button>
+        </DockPanel>
+        <syncfusion:SfDataGrid ItemsSource="{Binding Path=ListaArticulos}" 
+                                   SelectedItem="{Binding Path=ArticuloSeleccionado}"/>
+    </DockPanel>
+
 </Window>

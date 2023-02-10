@@ -9,14 +9,13 @@ namespace Revista_DigitalV2.Modelo
 {
     class Articulo : ObservableObject
     {
-        private string url;
+        private int id;
 
-        public string URL
+        public int Id
         {
-            get { return url; }
-            set { SetProperty(ref url, value); }
+            get { return id; }
+            set { SetProperty(ref id, value); }
         }
-
 
         private Autor autor;
 
@@ -24,6 +23,14 @@ namespace Revista_DigitalV2.Modelo
         {
             get { return autor; }
             set { SetProperty(ref autor, value); }
+        }
+
+        private string seccion;
+
+        public string Seccion
+        {
+            get { return seccion; }
+            set { SetProperty(ref seccion, value); }
         }
 
 
@@ -59,20 +66,14 @@ namespace Revista_DigitalV2.Modelo
             set { SetProperty(ref nickname, value); }
         }
 
-        private string seccion;
+        private string url;
 
-        public string Seccion
+        public string URL
         {
-            get { return seccion; }
-            set { SetProperty(ref seccion, value); }
+            get { return url; }
+            set { SetProperty(ref url, value); }
         }
-        private int id;
 
-        public int Id
-        {
-            get { return id; }
-            set { SetProperty(ref id, value); }
-        }
 
         public Articulo(Autor autor, string titulo, string cuerpo, string imagen, string seccion)
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Revista_DigitalV2.Modelo;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,32 @@ namespace Revista_DigitalV2.Vista_Modelo
             set { SetProperty(ref listaArticulos, value); }
         }
 
+        public RelayCommand EliminarArticuloCommand { get; }
+
+        private Articulo articuloSeleccionado;
+
+        public Articulo ArticuloSeleccionado
+        {
+            get { return articuloSeleccionado; }
+            set { SetProperty(ref articuloSeleccionado, value); }
+        }
+
+
         public VistaArticuloVM()
         {
             ListaArticulos = new ObservableCollection<Articulo>();
             // ejemplos articulos
             ListaArticulos.Add(new Articulo(new Autor("Juan", "Ju", ".", "twitter"), "In", "a", "b", "d"));
-        
+            ArticuloSeleccionado = null;
+            EliminarArticuloCommand = new RelayCommand(EliminarArticulo);
+
+        }
+
+
+        public void EliminarArticulo ()
+        {
+            ListaArticulos.Remove(ArticuloSeleccionado);
+            ArticuloSeleccionado = null;
         }
         
 

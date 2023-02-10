@@ -27,5 +27,10 @@ namespace Revista_DigitalV2.Vistas
             InitializeComponent();
             this.DataContext = vm;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }
