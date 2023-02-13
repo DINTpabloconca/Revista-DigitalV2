@@ -45,6 +45,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             set { SetProperty(ref articuloCreado, value); }
         }
 
+        
 
         public VistaCreacionArticuloVM()
         {
@@ -57,7 +58,6 @@ namespace Revista_DigitalV2.Vista_Modelo
             servicioArticulo = new ServicioCreacionArticulo();
             servicioGenerarPDFService = new GenerarPDFService();
             servicioPDFAzureService = new GestionAzureBlobService();
-
 
 
             ArticuloCreado = new Articulo();

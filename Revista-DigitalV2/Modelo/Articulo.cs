@@ -17,12 +17,12 @@ namespace Revista_DigitalV2.Modelo
             set { SetProperty(ref id, value); }
         }
 
-        private int idAutor;
+        private int autor;
 
-        public int IdAutor
+        public int Autor
         {
-            get { return idAutor; }
-            set { SetProperty(ref idAutor, value); }
+            get { return autor; }
+            set { SetProperty(ref autor, value); }
         }
 
         private string seccion;
@@ -77,7 +77,7 @@ namespace Revista_DigitalV2.Modelo
 
         public Articulo(int idAutor, string titulo, string cuerpo, string imagen, string seccion)
         {
-            IdAutor = idAutor;
+            Autor = idAutor;
             Titulo = titulo;
             Cuerpo = cuerpo;
             Imagen = imagen;
@@ -86,16 +86,16 @@ namespace Revista_DigitalV2.Modelo
             Nickname = null;
 
         }
-        public Articulo(int id,string autor, string titulo, string cuerpo, string imagen, string seccion)
+        public Articulo(int id,int idAutor, string titulo, string cuerpo, string imagen, string seccion)
         {
             Id = id;
-            Autor = autor;
+            Autor = idAutor;
             Titulo = titulo;
             Cuerpo = cuerpo;
             Imagen = imagen;
             Seccion = seccion;
-            //Nickname = Autor.Nickname (Cuando la clase autor esté creada)
-            Nickname = autor;
+            /* Nickname desde la base de datos con el idAutor*/
+            Nickname = null;
         }
 
 
