@@ -213,6 +213,7 @@
     <Compile Include="Servicios\DatabaseService.cs" />
     <Compile Include="Servicios\DialogoService.cs" />
     <Compile Include="Servicios\GenerarPDFService.cs" />
+    <Compile Include="Servicios\GenerarPáginaService.cs" />
     <Compile Include="Servicios\GestionAzureBlobService.cs" />
     <Compile Include="Servicios\ServicioCreacionArticulo.cs" />
     <Compile Include="Servicios\ServicioNavegacion.cs" />
@@ -291,9 +292,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\examinar_button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Vistas\index.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />
