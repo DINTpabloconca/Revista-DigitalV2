@@ -75,8 +75,8 @@
                 Hint="Autor"
                 Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2">
             <editors:SfTextBoxExt 
-                      SelectedValue="{Binding Path=AutorObjeto}"
-                      SearchItemPath="Nombre"
+                      Text="{Binding Path=AutorObjeto}"
+                      SearchItemPath="Nickname"
                       AutoCompleteMode="Suggest"
                       AutoCompleteSource="{Binding Path=ListaAutores}" />
         </inputLayout:SfTextInputLayout>

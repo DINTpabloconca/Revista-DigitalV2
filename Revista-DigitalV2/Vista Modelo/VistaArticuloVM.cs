@@ -37,9 +37,8 @@ namespace Revista_DigitalV2.Vista_Modelo
         {
             servicioDatabaseService = new DatabaseService();
 
-            ListaArticulos = new ObservableCollection<Articulo>();
-            // ejemplos articulos
             ListaArticulos = servicioDatabaseService.MostrarArticulos();
+
             ArticuloSeleccionado = null;
             EliminarArticuloCommand = new RelayCommand(EliminarArticulo);
 

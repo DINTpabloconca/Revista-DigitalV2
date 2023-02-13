@@ -37,9 +37,9 @@ namespace Revista_DigitalV2.Vista_Modelo
             set { SetProperty(ref listaAutores, value); }
         }
 
-        private Autor autorObjeto;
+        private string autorObjeto;
 
-        public Autor AutorObjeto
+        public string AutorObjeto
         {
             get { return autorObjeto; }
             set { SetProperty(ref autorObjeto, value); }
@@ -67,7 +67,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             //Cambiar por la base de datos
             ListaAutores = servicioDatabaseService.MostrarAutores();
             
-            AutorObjeto = null;
+            AutorObjeto = "";
 
             ArticuloCreado = new Articulo();
             AñadirArticuloCommand = new RelayCommand(AñadirArticulo);
@@ -78,7 +78,8 @@ namespace Revista_DigitalV2.Vista_Modelo
         public void AñadirArticulo()
         {
             //Aquí añadir el artículo a la base de datos
-            ArticuloCreado.Autor = AutorObjeto.Id;
+            //Acceder a la base de datos para obtener el id del autor con su nickname
+            ArticuloCreado.Autor = servicioDatabaseService.MostrarAutorPorNickname(AutorObjeto).Id;
             servicioDatabaseService.CrearArticulo(ArticuloCreado);
             Autor nAutor = null;
             nAutor = servicioDatabaseService.MostrarAutorPorId(ArticuloCreado.Autor);
