@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Revista_DigitalV2.Modelo;
+using Revista_DigitalV2.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,12 +31,15 @@ namespace Revista_DigitalV2.Vista_Modelo
             set { SetProperty(ref articuloSeleccionado, value); }
         }
 
+        public DatabaseService servicioDatabaseService;
 
         public VistaArticuloVM()
         {
+            servicioDatabaseService = new DatabaseService();
+
             ListaArticulos = new ObservableCollection<Articulo>();
             // ejemplos articulos
-            ListaArticulos.Add(new Articulo(2, "In", "a", "b", "d"));
+            ListaArticulos = servicioDatabaseService.MostrarArticulos();
             ArticuloSeleccionado = null;
             EliminarArticuloCommand = new RelayCommand(EliminarArticulo);
 
@@ -44,6 +48,7 @@ namespace Revista_DigitalV2.Vista_Modelo
 
         public void EliminarArticulo ()
         {
+            servicioDatabaseService.EliminarArticulo(ArticuloSeleccionado);
             ListaArticulos.Remove(ArticuloSeleccionado);
             ArticuloSeleccionado = null;
         }

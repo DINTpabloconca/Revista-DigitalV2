@@ -37,6 +37,13 @@ namespace Revista_DigitalV2.Vista_Modelo
             set { SetProperty(ref listaAutores, value); }
         }
 
+        private Autor autorObjeto;
+
+        public Autor AutorObjeto
+        {
+            get { return autorObjeto; }
+            set { SetProperty(ref autorObjeto, value); }
+        }
 
 
         private Articulo articuloCreado;
@@ -51,17 +58,16 @@ namespace Revista_DigitalV2.Vista_Modelo
 
         public VistaCreacionArticuloVM()
         {
-            //Cambiar por la base de datos
-            ListaAutores = new ObservableCollection<Autor>();
-            //Prueba (Borrar)
-            ListaAutores.Add(new Autor("Pedro", "Pedri", "C:/image.jpg", "facebook"));
-            ListaAutores.Add(new Autor("Juan", "Joaco", "C:/image.png", "twitter"));
             // Servicios
             servicioDatabaseService = new DatabaseService();
             servicioArticulo = new ServicioCreacionArticulo();
             servicioGenerarPDFService = new GenerarPDFService();
             servicioPDFAzureService = new GestionAzureBlobService();
 
+            //Cambiar por la base de datos
+            ListaAutores = servicioDatabaseService.MostrarAutores();
+            
+            AutorObjeto = null;
 
             ArticuloCreado = new Articulo();
             AñadirArticuloCommand = new RelayCommand(AñadirArticulo);
@@ -72,6 +78,8 @@ namespace Revista_DigitalV2.Vista_Modelo
         public void AñadirArticulo()
         {
             //Aquí añadir el artículo a la base de datos
+            ArticuloCreado.Autor = AutorObjeto.Id;
+            servicioDatabaseService.CrearArticulo(ArticuloCreado);
             Autor nAutor = null;
             nAutor = servicioDatabaseService.MostrarAutorPorId(ArticuloCreado.Autor);
             servicioGenerarPDFService.GenerarPdf(ArticuloCreado, nAutor);
