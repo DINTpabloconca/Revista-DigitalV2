@@ -129,7 +129,7 @@ namespace Revista_DigitalV2.Servicios
             {
                 while (lector.Read())
                 {
-                    string autor = (string)lector["autor"];
+                    int autor = (int)lector["autor"];
                     string titulo = (string)lector["titulo"];
                     string cuerpo = (string)lector["cuerpo"];
                     string imagen = (string)lector["imagen"];

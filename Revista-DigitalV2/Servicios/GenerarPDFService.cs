@@ -15,12 +15,12 @@ namespace Revista_DigitalV2.Servicios
 {
     class GenerarPDFService
     {
-        public void GenerarPdf(Articulo articuloModel)
+        public void GenerarPdf(Articulo articuloModel, Autor autor)
         {
             WebClient mywebClient = new WebClient();
             mywebClient.DownloadFile(articuloModel.Imagen, "downloadedImage.png");
 
-            mywebClient.DownloadFile(articuloModel.Autor.Imagen, "AuthorDownloadedImage.png");
+            mywebClient.DownloadFile(autor.Imagen, "AuthorDownloadedImage.png");
 
             Document.Create(container =>
             {
@@ -52,7 +52,7 @@ namespace Revista_DigitalV2.Servicios
                         .Text(x =>
                         {
                             x.Span("Autor: ");
-                            x.Span(articuloModel.Autor.Nombre);
+                            x.Span(autor.Nombre);
                         });
                     page.Footer()
                         .AlignRight()

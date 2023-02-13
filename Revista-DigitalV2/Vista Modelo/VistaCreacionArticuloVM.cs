@@ -21,6 +21,8 @@ namespace Revista_DigitalV2.Vista_Modelo
 
         public GestionAzureBlobService servicioPDFAzureService;
 
+        public DatabaseService servicioDatabaseService;
+
         public RelayCommand AñadirArticuloCommand { get; }
 
         public RelayCommand ExaminarImagenCommand { get; }
@@ -55,6 +57,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             ListaAutores.Add(new Autor("Pedro", "Pedri", "C:/image.jpg", "facebook"));
             ListaAutores.Add(new Autor("Juan", "Joaco", "C:/image.png", "twitter"));
             // Servicios
+            servicioDatabaseService = new DatabaseService();
             servicioArticulo = new ServicioCreacionArticulo();
             servicioGenerarPDFService = new GenerarPDFService();
             servicioPDFAzureService = new GestionAzureBlobService();
@@ -69,7 +72,9 @@ namespace Revista_DigitalV2.Vista_Modelo
         public void AñadirArticulo()
         {
             //Aquí añadir el artículo a la base de datos
-            servicioGenerarPDFService.GenerarPdf(ArticuloCreado);
+            Autor nAutor = null;
+            nAutor = servicioDatabaseService.MostrarAutorPorId(ArticuloCreado.Autor);
+            servicioGenerarPDFService.GenerarPdf(ArticuloCreado, nAutor);
             servicioPDFAzureService.SubirPDF(ArticuloCreado);
 
             //Aquí se vuelve a dejar vacío el artículo
