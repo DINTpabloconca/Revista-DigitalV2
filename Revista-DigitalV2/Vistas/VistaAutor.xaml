@@ -11,13 +11,13 @@
     <Window.Resources>
         <converter:RedsocialConverter x:Key="RedSocialConverter"/>
         <DataTemplate x:Key="plantillaGridAutores">
-            <Border BorderThickness="1" BorderBrush="Black" Height="100" Width="100">
+            <Border BorderThickness="1" BorderBrush="Black" Height="150" Width="150">
                 <DockPanel LastChildFill="False">
-                    <Image DockPanel.Dock="Left" Source="{Binding Path=ImagenAutor}"></Image>
-                    <TextBlock DockPanel.Dock="Top" Text="{Binding Path=NombreAutor}"></TextBlock>
+                    <Image DockPanel.Dock="Left" Source="{Binding Path=Imagen}" Height="30" Width="30"></Image>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding Path=Nombre}"></TextBlock>
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
-                        <Image Source="{Binding Path=ImagenRedSocial, Converter={StaticResource RedSocialConverter}}" Height="30" Width="30"></Image>
-                        <TextBlock Text="{Binding Path=NicknameAutor}"></TextBlock>
+                        <Image Source="{Binding Path=RedSocial, Converter={StaticResource RedSocialConverter}}" Height="30" Width="30"></Image>
+                        <TextBlock Text="{Binding Path=Nickname}"></TextBlock>
                     </StackPanel>
                 </DockPanel>
             </Border>
@@ -30,17 +30,17 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <TextBlock Text="Nombre"></TextBlock>
-            <TextBox Text="{Binding Path=NombreCrear}" ></TextBox>
+            <TextBox Text="{Binding Path=AutorFormulario.Nombre}" ></TextBox>
             <TextBlock Text="Nickname"></TextBlock>
-            <TextBox Text="{Binding Path=NicknameCrear}"></TextBox>
+            <TextBox Text="{Binding Path=AutorFormulario.Nickname}"></TextBox>
             <TextBlock Text="Red Social"></TextBlock>
-            <ComboBox ItemsSource="{Binding Path=Redes}" SelectedItem="{Binding Path=RedSeleccionada}"></ComboBox>
+            <ComboBox ItemsSource="{Binding Path=Redes}" SelectedItem="{Binding Path=AutorFormulario.RedSocial}"></ComboBox>
             <TextBlock Text="Imagen"></TextBlock>
             <Button Content="Seleccionar imagen" Command="{Binding Path=SelectImagenCommand}"></Button>
             <Button Content="Guardar" Command="{Binding Path=GuardarAutorCommand}"></Button>
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <ListBox Height="375" ItemsSource="{Binding Path=ListaAutores}" SelectedItem="{Binding Path=AutorSeleccionado}">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="375" ItemsSource="{Binding Path=ListaAutores}" ItemTemplate="{StaticResource plantillaGridAutores}" SelectedItem="{Binding Path=AutorSeleccionado}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel></WrapPanel>

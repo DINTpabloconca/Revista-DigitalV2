@@ -52,6 +52,17 @@ namespace Revista_DigitalV2.Modelo
             this.Imagen = imagen;
             this.RedSocial = red;
         }
+        public Autor(int id,string nombre, string nickname, string imagen, string red)
+        {
+            Id = id;
+            this.Nombre = nombre;
+            this.Nickname = nickname;
+            this.Imagen = imagen;
+            this.RedSocial = red;
+        }
+        public Autor()
+        {
 
+        }
     }
 }

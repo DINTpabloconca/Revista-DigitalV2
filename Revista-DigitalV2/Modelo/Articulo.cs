@@ -84,6 +84,17 @@ namespace Revista_DigitalV2.Modelo
             //Nickname = Autor.Nickname (Cuando la clase autor esté creada)
             Nickname = autor;
         }
+        public Articulo(int id,string autor, string titulo, string cuerpo, string imagen, string seccion)
+        {
+            Id = id;
+            Autor = autor;
+            Titulo = titulo;
+            Cuerpo = cuerpo;
+            Imagen = imagen;
+            Seccion = seccion;
+            //Nickname = Autor.Nickname (Cuando la clase autor esté creada)
+            Nickname = autor;
+        }
 
 
         public Articulo()
