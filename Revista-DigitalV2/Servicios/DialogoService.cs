@@ -22,5 +22,10 @@ namespace Revista_DigitalV2.Servicios
 			}
 			return false;
         }
-    }
+		public void DialogoErrorEliminacion()
+		{
+			MessageBoxResult result = MessageBox.Show("No se ha podido eliminar el autor porque tiene articulos asociados"
+				, "Eliminar autor", MessageBoxButton.OK);
+		}
+	}
 }

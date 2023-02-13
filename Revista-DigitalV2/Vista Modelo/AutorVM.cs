@@ -98,14 +98,33 @@ namespace Revista_DigitalV2.Vista_Modelo
 
         private void EliminarAutor()
         {
-            if (dialogoService.DialogoEliminar())
+            Autor autor = AutorSeleccionado;
+            if (!ComprobarArticulosAsociadosAAutor(autor.Id))
             {
-                Autor autor = AutorSeleccionado;
-                ListaAutores.Remove(autor);
-                database.EliminarAutor(autor);
+                if (dialogoService.DialogoEliminar())
+                {
+                    ListaAutores.Remove(autor);
+                    database.EliminarAutor(autor);
+                }
             }
-        }
+            else
+            {
+                dialogoService.DialogoErrorEliminacion();
+            }
 
+        }
+        private bool ComprobarArticulosAsociadosAAutor(int idAutor)
+        {
+            ObservableCollection<Articulo> articulos = database.MostrarArticulos();
+            foreach(Articulo articulo in articulos)
+            {
+                if(articulo.Id == idAutor)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         private void EditarAutor()
         {
             AutorAEditar = new Autor(AutorSeleccionado.Id, AutorSeleccionado.Nombre, AutorSeleccionado.Nickname, AutorSeleccionado.Imagen, AutorSeleccionado.RedSocial);
