@@ -118,6 +118,28 @@ namespace Revista_DigitalV2.Servicios
             lector.Close();
             return autor;
         }
+        public Autor MostrarAutorPorNickname(String nickname)
+        {
+            SqliteCommand comando = conexion.CreateCommand();
+
+            Autor autor = new Autor();
+            comando.CommandText = @"SELECT * FROM Autor Where nickname LIKE '%" + nickname+"%'";
+            SqliteDataReader lector = comando.ExecuteReader();
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    autor.Nombre = (string)lector["nombre"];
+                    autor.Nickname = (string)lector["nickname"];
+                    autor.Imagen = (string)lector["imagen"];
+                    autor.RedSocial = (string)lector["red_social"];
+                    autor.Id = lector.GetInt32(0);
+
+                }
+            }
+            lector.Close();
+            return autor;
+        }
         public ObservableCollection<Articulo> MostrarArticulos()
         {
             SqliteCommand comando = conexion.CreateCommand();
