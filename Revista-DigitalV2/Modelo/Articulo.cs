@@ -9,21 +9,28 @@ namespace Revista_DigitalV2.Modelo
 {
     class Articulo : ObservableObject
     {
-        private string url;
+        private int id;
 
-        public string URL
+        public int Id
         {
-            get { return url; }
-            set { SetProperty(ref url, value); }
+            get { return id; }
+            set { SetProperty(ref id, value); }
         }
 
+        private int idAutor;
 
-        private string autor;
-
-        public string Autor
+        public int IdAutor
         {
-            get { return autor; }
-            set { SetProperty(ref autor, value); }
+            get { return idAutor; }
+            set { SetProperty(ref idAutor, value); }
+        }
+
+        private string seccion;
+
+        public string Seccion
+        {
+            get { return seccion; }
+            set { SetProperty(ref seccion, value); }
         }
 
 
@@ -59,30 +66,25 @@ namespace Revista_DigitalV2.Modelo
             set { SetProperty(ref nickname, value); }
         }
 
-        private string seccion;
+        private string url;
 
-        public string Seccion
+        public string URL
         {
-            get { return seccion; }
-            set { SetProperty(ref seccion, value); }
-        }
-        private int id;
-
-        public int Id
-        {
-            get { return id; }
-            set { SetProperty(ref id, value); }
+            get { return url; }
+            set { SetProperty(ref url, value); }
         }
 
-        public Articulo(string autor, string titulo, string cuerpo, string imagen, string seccion)
+
+        public Articulo(int idAutor, string titulo, string cuerpo, string imagen, string seccion)
         {
-            Autor = autor;
+            IdAutor = idAutor;
             Titulo = titulo;
             Cuerpo = cuerpo;
             Imagen = imagen;
             Seccion = seccion;
-            //Nickname = Autor.Nickname (Cuando la clase autor esté creada)
-            Nickname = autor;
+            /* Nickname desde la base de datos con el idAutor*/
+            Nickname = null;
+
         }
         public Articulo(int id,string autor, string titulo, string cuerpo, string imagen, string seccion)
         {

@@ -16,12 +16,14 @@ namespace Revista_DigitalV2.Vista_Modelo
         }
         public RelayCommand AbrirCreacionArticuloCommand { get; }
         public RelayCommand AbrirVistaAutorCommand { get; }
-        
+        public RelayCommand AbrirVistaArticuloCommand { get; }
+
         public MainWindowVM()
         {
             servicioNavegacion = new ServicioNavegacion();
             AbrirCreacionArticuloCommand = new RelayCommand(AbrirCreacionArticulo);
             AbrirVistaAutorCommand = new RelayCommand(AbrirVistaAutor);
+            AbrirVistaArticuloCommand = new RelayCommand(AbrirVistaArticulo);
         }
         public void AbrirCreacionArticulo()
         {
@@ -30,6 +32,10 @@ namespace Revista_DigitalV2.Vista_Modelo
         public void AbrirVistaAutor()
         {
             servicioNavegacion.AbrirVistaAutor();
+        }
+        public void AbrirVistaArticulo()
+        {
+            ContenidoVentana = servicioNavegacion.AbrirVistaArticulo();
         }
     }
 }

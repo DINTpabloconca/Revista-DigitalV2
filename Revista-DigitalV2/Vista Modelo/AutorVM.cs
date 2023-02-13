@@ -71,6 +71,8 @@ namespace Revista_DigitalV2.Vista_Modelo
         private DatabaseService database;
         private DialogoService dialogoService;
         private ServicioCreacionArticulo servicioArticulo;
+
+        private GestionAzureBlobService gestionAzureBlobService; 
         public AutorVM()
         {
             estaEditando = false;
@@ -87,6 +89,8 @@ namespace Revista_DigitalV2.Vista_Modelo
             database = new DatabaseService();
             dialogoService = new DialogoService();
             servicioArticulo = new ServicioCreacionArticulo();
+            gestionAzureBlobService = new GestionAzureBlobService();
+
             ListaAutores = database.MostrarAutores();
             autorFormulario = new Autor();
             autorNuevo = new Autor();
