@@ -11,26 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Revista_DigitalV2.Vistas
 {
     /// <summary>
-    /// Lógica de interacción para VistaArticulo.xaml
+    /// Lógica de interacción para VistaArticuloUserControl.xaml
     /// </summary>
-    public partial class VistaArticulo : Window
+    public partial class VistaArticuloUserControl : UserControl
     {
         VistaArticuloVM vm;
-        public VistaArticulo()
+        public VistaArticuloUserControl()
         {
             vm = new VistaArticuloVM();
             InitializeComponent();
             this.DataContext = vm;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
         }
     }
 }

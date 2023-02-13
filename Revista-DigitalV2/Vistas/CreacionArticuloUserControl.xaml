@@ -13,9 +13,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-        <Style TargetType="{x:Type TextBox}" x:Key="TextboxCenter">
-
-        </Style>
     </UserControl.Resources>
     <Grid Background="White" Height="500">
         <Grid.ColumnDefinitions>
@@ -40,7 +37,7 @@
             Margin="0,0,5,0"
             Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
             Hint="Título">
-            <TextBox Text="{Binding Path=ArticuloCreado.Titulo}" Style="{StaticResource TextboxCenter}"></TextBox>
+            <TextBox Text="{Binding Path=ArticuloCreado.Titulo}" ></TextBox>
         </inputLayout:SfTextInputLayout>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Sección: " Style="{StaticResource LabelCenter}"></Label>
@@ -49,7 +46,7 @@
             ContainerType="Outlined"
             Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
             Hint="Seccion">
-            <TextBox Style="{StaticResource TextboxCenter}" Text="{Binding Path=ArticuloCreado.Seccion}" ></TextBox>
+            <TextBox Text="{Binding Path=ArticuloCreado.Seccion}" ></TextBox>
         </inputLayout:SfTextInputLayout>
         <Label Grid.Row="3" Grid.Column="0" Content="Cuerpo: " Style="{StaticResource LabelCenter}"></Label>
         <inputLayout:SfTextInputLayout
@@ -64,7 +61,7 @@
             ContainerType="Outlined"
             Grid.Row="5" Grid.Column="1"
             Hint="Imagen">
-            <TextBox  Text="{Binding Path=ArticuloCreado.Imagen}" Style="{StaticResource TextboxCenter}"></TextBox>
+            <TextBox  Text="{Binding Path=ArticuloCreado.Imagen}" ></TextBox>
         </inputLayout:SfTextInputLayout>
         <syncfusion:ButtonAdv Label="Examinar" Grid.Column="2" Grid.Row="5" Margin="10" Width="100" Height="40"  Command="{Binding Path=ExaminarImagenCommand}" LargeIcon="../Recursos/examinar_button.png" SmallIcon="../Recursos/examinar_button.png"/>
 

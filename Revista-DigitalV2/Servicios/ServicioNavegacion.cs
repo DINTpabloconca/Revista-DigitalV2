@@ -11,6 +11,9 @@ namespace Revista_DigitalV2.Servicios
 {
     class ServicioNavegacion
     {
+        bool VistaArticulo = false;
+        VistaArticuloUserControl vista = null;
+
         public CreacionArticuloUserControl AbrirCreacionArticulo()
         {
             return new CreacionArticuloUserControl();
@@ -21,10 +24,18 @@ namespace Revista_DigitalV2.Servicios
             return vistaAutor.ShowDialog();
         }
 
-        public bool? AbrirVistaArticulo()
+        public VistaArticuloUserControl AbrirVistaArticulo()
         {
-            VistaArticulo vistaArticulo = new VistaArticulo();
-            return vistaArticulo.ShowDialog();
+           
+            if (!VistaArticulo)
+            {
+                vista = new VistaArticuloUserControl();
+                VistaArticulo = true;
+                return vista;
+            }
+            else
+                return vista;
+
         }
     }
 }

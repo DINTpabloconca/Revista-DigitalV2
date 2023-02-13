@@ -35,7 +35,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         {
             ListaArticulos = new ObservableCollection<Articulo>();
             // ejemplos articulos
-            ListaArticulos.Add(new Articulo(new Autor("Juan", "Ju", ".", "twitter"), "In", "a", "b", "d"));
+            ListaArticulos.Add(new Articulo(2, "In", "a", "b", "d"));
             ArticuloSeleccionado = null;
             EliminarArticuloCommand = new RelayCommand(EliminarArticulo);
 

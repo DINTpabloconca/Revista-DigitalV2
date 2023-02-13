@@ -17,12 +17,12 @@ namespace Revista_DigitalV2.Modelo
             set { SetProperty(ref id, value); }
         }
 
-        private Autor autor;
+        private int idAutor;
 
-        public Autor Autor
+        public int IdAutor
         {
-            get { return autor; }
-            set { SetProperty(ref autor, value); }
+            get { return idAutor; }
+            set { SetProperty(ref idAutor, value); }
         }
 
         private string seccion;
@@ -75,14 +75,15 @@ namespace Revista_DigitalV2.Modelo
         }
 
 
-        public Articulo(Autor autor, string titulo, string cuerpo, string imagen, string seccion)
+        public Articulo(int idAutor, string titulo, string cuerpo, string imagen, string seccion)
         {
-            Autor = autor;
+            IdAutor = idAutor;
             Titulo = titulo;
             Cuerpo = cuerpo;
             Imagen = imagen;
             Seccion = seccion;
-            Nickname = Autor.Nickname;
+            /* Nickname desde la base de datos con el idAutor*/
+            Nickname = null;
 
         }
 
