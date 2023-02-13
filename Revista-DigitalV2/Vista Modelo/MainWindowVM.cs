@@ -31,7 +31,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         }
         public void AbrirVistaAutor()
         {
-            servicioNavegacion.AbrirVistaAutor();
+            ContenidoVentana = servicioNavegacion.AbrirVistaAutor();
         }
         public void AbrirVistaArticulo()
         {

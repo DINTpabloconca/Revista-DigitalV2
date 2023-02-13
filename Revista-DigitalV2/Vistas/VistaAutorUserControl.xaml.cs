@@ -11,17 +11,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Revista_DigitalV2.Vistas
 {
     /// <summary>
-    /// Lógica de interacción para VistaAutor.xaml
+    /// Lógica de interacción para VistaAutorUserControl.xaml
     /// </summary>
-    public partial class VistaAutor : Window
+    public partial class VistaAutorUserControl : UserControl
     {
         AutorVM vm;
-        public VistaAutor()
+        public VistaAutorUserControl()
         {
             InitializeComponent();
             vm = new AutorVM();

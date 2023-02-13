@@ -18,10 +18,9 @@ namespace Revista_DigitalV2.Servicios
         {
             return new CreacionArticuloUserControl();
         }
-        public bool? AbrirVistaAutor()
+        public VistaAutorUserControl AbrirVistaAutor()
         {
-            VistaAutor vistaAutor = new VistaAutor();
-            return vistaAutor.ShowDialog();
+            return new VistaAutorUserControl();
         }
 
         public VistaArticuloUserControl AbrirVistaArticulo()
