@@ -9,8 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style TargetType="{x:Type Button}" x:Key="EliminarButton">
+        <Style TargetType="{x:Type Button}">
             <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="DockPanel.Dock" Value="Right"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="70"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=ArticuloSeleccionado}" Value="{x:Null}">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -20,7 +23,8 @@
     </UserControl.Resources>
     <DockPanel LastChildFill="True" Background="White">
         <DockPanel DockPanel.Dock="Bottom" Margin="5" LastChildFill="False">
-            <Button DockPanel.Dock="Right" Content="Eliminar" Margin="5" Command="{Binding Path=EliminarArticuloCommand}" Style="{StaticResource EliminarButton}"></Button>
+            <Button Command="{Binding Path=EliminarArticuloCommand}">Eliminar</Button>
+            <Button Command="{Binding Path=PublicarArticuloCommand}">Publicar</Button>
         </DockPanel>
         <syncfusion:SfDataGrid ItemsSource="{Binding Path=ListaArticulos}" 
                                    SelectedItem="{Binding Path=ArticuloSeleccionado}"/>

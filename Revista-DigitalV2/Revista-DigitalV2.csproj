@@ -216,7 +216,7 @@
     <Compile Include="Servicios\DatabaseService.cs" />
     <Compile Include="Servicios\DialogoService.cs" />
     <Compile Include="Servicios\GenerarPDFService.cs" />
-    <Compile Include="Servicios\GenerarPáginaService.cs" />
+    <Compile Include="Servicios\GenerarPaginaService.cs" />
     <Compile Include="Servicios\GestionAzureBlobService.cs" />
     <Compile Include="Servicios\ServicioCreacionArticulo.cs" />
     <Compile Include="Servicios\ServicioNavegacion.cs" />

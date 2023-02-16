@@ -1,6 +1,8 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Revista_DigitalV2.Modelo;
 using Revista_DigitalV2.Servicios;
+using System;
 using System.Windows.Controls;
 
 namespace Revista_DigitalV2.Vista_Modelo
@@ -8,6 +10,7 @@ namespace Revista_DigitalV2.Vista_Modelo
     class MainWindowVM : ObservableObject
     {
         private ServicioNavegacion servicioNavegacion;
+        
         private UserControl contenidoVentana;
         public UserControl ContenidoVentana
         {
@@ -17,14 +20,19 @@ namespace Revista_DigitalV2.Vista_Modelo
         public RelayCommand AbrirCreacionArticuloCommand { get; }
         public RelayCommand AbrirVistaAutorCommand { get; }
         public RelayCommand AbrirVistaArticuloCommand { get; }
+        
 
         public MainWindowVM()
         {
             servicioNavegacion = new ServicioNavegacion();
+            generarPaginaService = new GenerarPaginaService();
+
             AbrirCreacionArticuloCommand = new RelayCommand(AbrirCreacionArticulo);
             AbrirVistaAutorCommand = new RelayCommand(AbrirVistaAutor);
             AbrirVistaArticuloCommand = new RelayCommand(AbrirVistaArticulo);
+            
         }
+
         public void AbrirCreacionArticulo()
         {
             ContenidoVentana = servicioNavegacion.AbrirCreacionArticulo();

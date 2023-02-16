@@ -40,12 +40,17 @@
                 <Image Source="Recursos/administrar_autores.png"/>
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
+        <syncfusion:NavigationItem
+                Header="Generar página"
+                IsExpanded="True"
+                IsSelected="True"
+                Command="{Binding Path=GenerarPagina}">
+            <syncfusion:NavigationItem.Icon>
+                <Image Source="Recursos/administrar_autores.png"/>
+            </syncfusion:NavigationItem.Icon>
+        </syncfusion:NavigationItem>
         <syncfusion:SfNavigationDrawer.ContentView>
-            <Label
-                Width="150"
-                Height="30"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+            <ContentControl
                 Content="{Binding Path=ContenidoVentana}" />
         </syncfusion:SfNavigationDrawer.ContentView>
     </syncfusion:SfNavigationDrawer>
