@@ -1,5 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using Revista_DigitalV2.Mensajes;
 using Revista_DigitalV2.Modelo;
 using Revista_DigitalV2.Servicios;
 using System;
@@ -56,7 +58,14 @@ namespace Revista_DigitalV2.Vista_Modelo
             set { SetProperty(ref articuloCreado, value); }
         }
 
-        
+        private ObservableCollection<ListaPalabrasProhibidas> listaProhibida;
+
+        public ObservableCollection<ListaPalabrasProhibidas> ListaProhibida
+        {
+            get { return listaProhibida; }
+            set { SetProperty(ref listaProhibida, value); }
+        }
+
 
         public VistaCreacionArticuloVM()
         {
@@ -73,6 +82,11 @@ namespace Revista_DigitalV2.Vista_Modelo
             AutorObjeto = "";
 
             ArticuloCreado = new Articulo();
+
+            WeakReferenceMessenger.Default.Register<ListaModificadaMessage>(this, (r, m) =>
+             {
+                 ListaProhibida = m.Value;
+             });
             AñadirArticuloCommand = new RelayCommand(AñadirArticulo);
             ExaminarImagenCommand = new RelayCommand(ExaminarImagen);
             VaciarArticuloCommand = new RelayCommand(VaciarArticulo);

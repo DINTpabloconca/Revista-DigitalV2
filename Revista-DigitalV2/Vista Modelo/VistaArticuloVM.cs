@@ -55,7 +55,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             generarPaginaService.GenerarHTML(ListaArticulos);
         }
 
-        public void EliminarArticulo ()
+        public void EliminarArticulo()
         {
             if (dialogoService.DialogoEliminarArticulo())
             {

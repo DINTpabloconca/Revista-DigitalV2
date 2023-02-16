@@ -2,6 +2,7 @@
 using Microsoft.Toolkit.Mvvm.Input;
 using Revista_DigitalV2.Modelo;
 using Revista_DigitalV2.Servicios;
+using Revista_DigitalV2.Vistas;
 using System;
 using System.Windows.Controls;
 
@@ -20,6 +21,9 @@ namespace Revista_DigitalV2.Vista_Modelo
         public RelayCommand AbrirCreacionArticuloCommand { get; }
         public RelayCommand AbrirVistaAutorCommand { get; }
         public RelayCommand AbrirVistaArticuloCommand { get; }
+
+        public RelayCommand AbrirVistaPalabrasProhibidasCommand { get; }
+
         
 
         public MainWindowVM()
@@ -29,7 +33,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             AbrirCreacionArticuloCommand = new RelayCommand(AbrirCreacionArticulo);
             AbrirVistaAutorCommand = new RelayCommand(AbrirVistaAutor);
             AbrirVistaArticuloCommand = new RelayCommand(AbrirVistaArticulo);
-            
+            AbrirVistaPalabrasProhibidasCommand = new RelayCommand(AbrirVistaPalabrasProhibidas);
         }
 
         public void AbrirCreacionArticulo()
@@ -44,5 +48,12 @@ namespace Revista_DigitalV2.Vista_Modelo
         {
             ContenidoVentana = servicioNavegacion.AbrirVistaArticulo();
         }
+
+        public void AbrirVistaPalabrasProhibidas()
+        {
+            ContenidoVentana = servicioNavegacion.AbrirVistaPalabrasProhibidas();
+        }
+
+        
     }
 }

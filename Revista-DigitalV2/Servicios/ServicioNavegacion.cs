@@ -13,6 +13,8 @@ namespace Revista_DigitalV2.Servicios
     {
         bool VistaArticulo = false;
         VistaArticuloUserControl vista = null;
+        bool VistaProhibidaBoolean = false;
+        VistaPalabrasProhibidasUserControl vistaProhibida = null;
 
         public CreacionArticuloUserControl AbrirCreacionArticulo()
         {
@@ -35,6 +37,25 @@ namespace Revista_DigitalV2.Servicios
             else
                 return vista;
 
+        }
+
+        public VistaPalabrasProhibidasUserControl AbrirVistaPalabrasProhibidas()
+        {
+            if (!VistaProhibidaBoolean)
+            {
+                vistaProhibida = new VistaPalabrasProhibidasUserControl();
+                VistaProhibidaBoolean = true;
+                return vistaProhibida;
+            }
+            else
+                return vistaProhibida;
+        }
+
+        public bool? AbrirVistaCrearLista()
+        {
+            CrearListaWindow vista = new CrearListaWindow();
+            vista.ShowInTaskbar = false;
+            return vista.ShowDialog();
         }
     }
 }

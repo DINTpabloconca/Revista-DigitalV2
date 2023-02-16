@@ -1,0 +1,53 @@
+﻿<Window x:Class="Revista_DigitalV2.Vistas.CrearListaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Revista_DigitalV2.Vistas"
+        mc:Ignorable="d"
+        Title="CrearListaWindow" Height="450" Width="800" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="AñadirPalabra">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PalabraEscrita}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="EliminarPalabra">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PalabraSeleccionada}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+            <Label Content="Título: " Margin="5"/>
+            <TextBox Text="{Binding Path=AñadirLista.Titulo}" Margin="5"/>
+        </DockPanel>
+        <DockPanel Margin="5" DockPanel.Dock="Bottom" LastChildFill="True">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <Button Width="100" Content="Salir" Margin="5" IsCancel="True"/>
+                <Button Width="100" Content="Guardar" Margin="5" IsDefault="True" Click="Button_Click"/>
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button Content="Añadir Palabra" Margin="5" Command="{Binding Path=AñadirPalabraCommand}" Style="{StaticResource AñadirPalabra}"></Button>
+                <Button Content="Eliminar Palabra" Margin="5" Command="{Binding Path=EliminarPalabraCommand}" Style="{StaticResource EliminarPalabra}"></Button>
+            </StackPanel>
+            
+            <TextBox Margin="5" Text="{Binding Path=PalabraEscrita, UpdateSourceTrigger=PropertyChanged}"></TextBox> 
+        </DockPanel>
+        <ListBox ItemsSource="{Binding Path=ListaPalabras}" SelectedItem="{Binding Path=PalabraSeleccionada}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </DockPanel>
+</Window>

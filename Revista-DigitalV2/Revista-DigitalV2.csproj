@@ -211,8 +211,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Convertidores\RedsocialConverter.cs" />
+    <Compile Include="Mensajes\ListaModificadaMessage.cs" />
+    <Compile Include="Mensajes\TextoModificadoMessage.cs" />
     <Compile Include="Modelo\Articulo.cs" />
     <Compile Include="Modelo\Autor.cs" />
+    <Compile Include="Modelo\ListaPalabrasProhibidas.cs" />
     <Compile Include="Servicios\DatabaseService.cs" />
     <Compile Include="Servicios\DialogoService.cs" />
     <Compile Include="Servicios\GenerarPDFService.cs" />
@@ -221,17 +224,25 @@
     <Compile Include="Servicios\ServicioCreacionArticulo.cs" />
     <Compile Include="Servicios\ServicioNavegacion.cs" />
     <Compile Include="Vista Modelo\AutorVM.cs" />
+    <Compile Include="Vista Modelo\CrearListaWindowVM.cs" />
     <Compile Include="Vista Modelo\MainWindowVM.cs" />
+    <Compile Include="Vista Modelo\PalabrasProhibidasVM.cs" />
     <Compile Include="Vista Modelo\VistaArticuloVM.cs" />
     <Compile Include="Vista Modelo\VistaCreacionArticuloVM.cs" />
     <Compile Include="Vistas\CreacionArticuloUserControl.xaml.cs">
       <DependentUpon>CreacionArticuloUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\CrearListaWindow.xaml.cs">
+      <DependentUpon>CrearListaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\VistaArticuloUserControl.xaml.cs">
       <DependentUpon>VistaArticuloUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\VistaAutorUserControl.xaml.cs">
       <DependentUpon>VistaAutorUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\VistaPalabrasProhibidasUserControl.xaml.cs">
+      <DependentUpon>VistaPalabrasProhibidasUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -249,11 +260,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Vistas\CrearListaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vistas\VistaArticuloUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\VistaAutorUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\VistaPalabrasProhibidasUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -303,6 +322,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\revista_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\palabras_prohibidas.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />
