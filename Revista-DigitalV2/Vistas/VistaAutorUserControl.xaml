@@ -19,6 +19,12 @@
         <Style TargetType="Image" x:Key="ImagenAutor">
             <Setter Property="Margin" Value="10"></Setter>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="150"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Width" Value="300"></Setter>
+        </Style>
         <converter:RedsocialConverter x:Key="RedSocialConverter"/>
         <DataTemplate x:Key="plantillaGridAutores">
             <Border BorderThickness="1" BorderBrush="Black" Height="200" Width="200">
@@ -26,12 +32,39 @@
                     <TextBlock Style="{StaticResource TituloAutor}" DockPanel.Dock="Top" Text="{Binding Path=Nombre}"></TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
                         <Image Source="{Binding Path=RedSocial, Converter={StaticResource RedSocialConverter}}" Height="30" Width="30"></Image>
-                        <TextBlock Text="{Binding Path=Nickname}"></TextBlock>
+                        <TextBlock VerticalAlignment="Center" Margin="5" Text="{Binding Path=Nickname}"></TextBlock>
                     </StackPanel>
                     <Image Source="{Binding Path=Imagen}" Style="{StaticResource ImagenAutor}"></Image>
                 </DockPanel>
             </Border>
         </DataTemplate>
+        <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+            <Border x:Name="border" CornerRadius="4" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="4" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDefaulted" Value="True">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFBEE6FD"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFC4E5F6"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                    <Setter Property="Foreground" Value="#FF838383"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </UserControl.Resources>
     <Grid Height="500">
         <Grid.ColumnDefinitions>
@@ -39,27 +72,40 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <TextBlock Text="Nombre"></TextBlock>
             <inputLayout:SfTextInputLayout
+            Width="300"
             ContainerType="Outlined"
             Margin="0,0,5,0"
             Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
             Hint="Nombre">
-                <TextBox Text="{Binding Path=AutorFormulario.Nombre}" ></TextBox>
+                <TextBox Width="300" Text="{Binding Path=AutorFormulario.Nombre}" ></TextBox>
             </inputLayout:SfTextInputLayout>
             <inputLayout:SfTextInputLayout
+            Width="300"
             ContainerType="Outlined"
             Margin="0,0,5,0"
             Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
             Hint="Nickname">
                 <TextBox Text="{Binding Path=AutorFormulario.Nickname}"></TextBox>
             </inputLayout:SfTextInputLayout>
-            
-            <TextBlock Text="Red Social"></TextBlock>
-            <ComboBox ItemsSource="{Binding Path=Redes}" SelectedItem="{Binding Path=AutorFormulario.RedSocial}"></ComboBox>
-            <TextBlock Text="Imagen"></TextBlock>
-            <Button Content="Seleccionar imagen" Command="{Binding Path=SelectImagenCommand}"></Button>
-            <Button Content="Guardar" Command="{Binding Path=GuardarAutorCommand}"></Button>
+
+            <TextBlock TextAlignment="Center" Text="Red Social"></TextBlock>
+            <syncfusion:ComboBoxAdv Margin="10,10,10,30" Height="30" Width="150" ItemsSource="{Binding Path=Redes}" SelectedItem="{Binding Path=AutorFormulario.RedSocial}">
+            </syncfusion:ComboBoxAdv>
+
+            <Button Margin="10" Template="{DynamicResource ButtonControlTemplate1}" Content="Seleccionar imagen" Command="{Binding Path=SelectImagenCommand}"></Button>
+
+            <inputLayout:SfTextInputLayout
+            Width="300"
+            ContainerType="Outlined"
+            Margin="0,0,5,0"
+            Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+            Hint="Imagen">
+                <TextBox Text="{Binding Path=ImagenSeleccionadaPorUsuario}" IsReadOnly="True"></TextBox>
+            </inputLayout:SfTextInputLayout>
+
+
+            <Button Template="{DynamicResource ButtonControlTemplate1}" Content="Guardar" Command="{Binding Path=GuardarAutorCommand}"></Button>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="450" ItemsSource="{Binding Path=ListaAutores}" ItemTemplate="{StaticResource plantillaGridAutores}" SelectedItem="{Binding Path=AutorSeleccionado}">
@@ -70,8 +116,8 @@
                 </ListBox.ItemsPanel>
             </ListBox>
             <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding Path=EditarAutorCommand}">Editar autor</Button>
-                <Button Command="{Binding Path=EliminarAutorCommand}">Eliminar autor</Button>
+                <Button Command="{Binding Path=EditarAutorCommand}" Template="{DynamicResource ButtonControlTemplate1}">Editar autor</Button>
+                <Button Command="{Binding Path=EliminarAutorCommand}" Template="{DynamicResource ButtonControlTemplate1}">Eliminar autor</Button>
             </StackPanel>
         </StackPanel>
     </Grid>
