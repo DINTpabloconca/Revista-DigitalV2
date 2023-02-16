@@ -16,13 +16,13 @@ namespace Revista_DigitalV2.Convertidores
             switch (value.ToString())
             {
                 case "Facebook":
-                    imagen = "Recursos/facebook_logo.png";
+                    imagen = "/Recursos/facebook_logo.png";
                     break;
                 case "Twitter":
-                    imagen = "Recursos/twitter_logo.png";
+                    imagen = "/Recursos/twitter_logo.png";
                     break;
                 case "Instagram":
-                    imagen = "Recursos/instagram_logo.png";
+                    imagen = "/Recursos/instagram_logo.png";
                     break;
             }
             return imagen;

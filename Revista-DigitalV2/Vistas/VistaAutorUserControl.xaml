@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Revista_DigitalV2.Vistas.VistaAutorUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:Revista_DigitalV2.Convertidores"
+             xmlns:local="clr-namespace:Revista_DigitalV2.Vistas"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="TituloAutor">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Image" x:Key="ImagenAutor">
+            <Setter Property="Margin" Value="10"></Setter>
+        </Style>
+        <converter:RedsocialConverter x:Key="RedSocialConverter"/>
+        <DataTemplate x:Key="plantillaGridAutores">
+            <Border BorderThickness="1" BorderBrush="Black" Height="200" Width="200">
+                <DockPanel LastChildFill="True">
+                    <TextBlock Style="{StaticResource TituloAutor}" DockPanel.Dock="Top" Text="{Binding Path=Nombre}"></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
+                        <Image Source="{Binding Path=RedSocial, Converter={StaticResource RedSocialConverter}}" Height="30" Width="30"></Image>
+                        <TextBlock Text="{Binding Path=Nickname}"></TextBlock>
+                    </StackPanel>
+                    <Image Source="{Binding Path=Imagen}" Style="{StaticResource ImagenAutor}"></Image>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Height="500">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Nombre"></TextBlock>
+            <TextBox Text="{Binding Path=AutorFormulario.Nombre}" ></TextBox>
+            <TextBlock Text="Nickname"></TextBlock>
+            <TextBox Text="{Binding Path=AutorFormulario.Nickname}"></TextBox>
+            <TextBlock Text="Red Social"></TextBlock>
+            <ComboBox ItemsSource="{Binding Path=Redes}" SelectedItem="{Binding Path=AutorFormulario.RedSocial}"></ComboBox>
+            <TextBlock Text="Imagen"></TextBlock>
+            <Button Content="Seleccionar imagen" Command="{Binding Path=SelectImagenCommand}"></Button>
+            <Button Content="Guardar" Command="{Binding Path=GuardarAutorCommand}"></Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="450" ItemsSource="{Binding Path=ListaAutores}" ItemTemplate="{StaticResource plantillaGridAutores}" SelectedItem="{Binding Path=AutorSeleccionado}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding Path=EditarAutorCommand}">Editar autor</Button>
+                <Button Command="{Binding Path=EliminarAutorCommand}">Eliminar autor</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

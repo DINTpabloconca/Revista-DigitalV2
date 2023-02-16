@@ -227,11 +227,11 @@
     <Compile Include="Vistas\CreacionArticuloUserControl.xaml.cs">
       <DependentUpon>CreacionArticuloUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\VistaArticulo.xaml.cs">
-      <DependentUpon>VistaArticulo.xaml</DependentUpon>
+    <Compile Include="Vistas\VistaArticuloUserControl.xaml.cs">
+      <DependentUpon>VistaArticuloUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\VistaAutor.xaml.cs">
-      <DependentUpon>VistaAutor.xaml</DependentUpon>
+    <Compile Include="Vistas\VistaAutorUserControl.xaml.cs">
+      <DependentUpon>VistaAutorUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -249,13 +249,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vistas\VistaArticulo.xaml">
+    <Page Include="Vistas\VistaArticuloUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\VistaAutor.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Vistas\VistaAutorUserControl.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

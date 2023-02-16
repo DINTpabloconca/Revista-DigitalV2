@@ -13,53 +13,13 @@ namespace Revista_DigitalV2.Vista_Modelo
 {
     class AutorVM : ObservableObject
     {
+        private bool estaEditando;
         public RelayCommand SelectImagenCommand { get; }
 
         public RelayCommand GuardarAutorCommand { get; }
         public RelayCommand EditarAutorCommand { get; }
         public RelayCommand EliminarAutorCommand { get; }
 
-        private string nombreAutor;
-        public string NombreAutor
-        {
-            get { return nombreAutor; }
-            set { SetProperty(ref nombreAutor, value); }
-        }
-
-        private string imagenAutor;
-        public string ImagenAutor
-        {
-            get { return imagenAutor; }
-            set { SetProperty(ref imagenAutor, value); }
-        }
-
-        private string imagenRedSocial;
-        public string ImagenRedSocial
-        {
-            get { return imagenRedSocial; }
-            set { SetProperty(ref imagenRedSocial, value); }
-        }
-
-        private string nicknameAutor;
-        public string NicknameAutor
-        {
-            get { return nicknameAutor; }
-            set { SetProperty(ref nicknameAutor, value); }
-        }
-
-        private string nombreCrear;
-        public string NombreCrear
-        {
-            get { return nombreCrear; }
-            set { SetProperty(ref nombreCrear, value); }
-        }
-
-        private string nicknameCrear;
-        public string NicknameCrear
-        {
-            get { return nicknameCrear; }
-            set { SetProperty(ref nicknameCrear, value); }
-        }
 
         private string imagenSeleccionadaPorUsuario;
         public string ImagenSeleccionadaPorUsuario
@@ -67,12 +27,7 @@ namespace Revista_DigitalV2.Vista_Modelo
             get { return imagenSeleccionadaPorUsuario; }
             set { SetProperty(ref imagenSeleccionadaPorUsuario, value); }
         }
-        private string redSeleccionada;
-        public string RedSeleccionada
-        {
-            get { return redSeleccionada; }
-            set { SetProperty(ref redSeleccionada, value); }
-        }
+
         private ObservableCollection<string> redes;
         public ObservableCollection<string> Redes
         {
@@ -92,6 +47,27 @@ namespace Revista_DigitalV2.Vista_Modelo
             get { return autorSeleccionado; }
             set { SetProperty(ref autorSeleccionado, value); }
         }
+        private Autor autorAEditar;
+
+        public Autor AutorAEditar
+        {
+            get { return autorAEditar; }
+            set { SetProperty(ref autorAEditar, value); }
+        }
+        private Autor autorFormulario;
+
+        public Autor AutorFormulario
+        {
+            get { return autorFormulario; }
+            set { SetProperty(ref autorFormulario, value); }
+        }
+        private Autor autorNuevo;
+
+        public Autor AutorNuevo
+        {
+            get { return autorNuevo; }
+            set { SetProperty(ref autorNuevo, value); }
+        }
         private DatabaseService database;
         private DialogoService dialogoService;
         private ServicioCreacionArticulo servicioArticulo;
@@ -99,6 +75,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         private GestionAzureBlobService gestionAzureBlobService; 
         public AutorVM()
         {
+            estaEditando = false;
             Redes = new ObservableCollection<string>();
             Redes.Add("Instagram");
             Redes.Add("Twitter");
@@ -115,26 +92,44 @@ namespace Revista_DigitalV2.Vista_Modelo
             gestionAzureBlobService = new GestionAzureBlobService();
 
             ListaAutores = database.MostrarAutores();
-
+            autorFormulario = new Autor();
+            autorNuevo = new Autor();
         }
 
         private void EliminarAutor()
         {
-            if (dialogoService.DialogoEliminar())
+            Autor autor = AutorSeleccionado;
+            if (!ComprobarArticulosAsociadosAAutor(autor.Id))
             {
-                Autor autor = AutorSeleccionado;
-                ListaAutores.Remove(autor);
-                database.EliminarAutor(autor);
+                if (dialogoService.DialogoEliminar())
+                {
+                    ListaAutores.Remove(autor);
+                    database.EliminarAutor(autor);
+                }
             }
-        }
+            else
+            {
+                dialogoService.DialogoErrorEliminacion();
+            }
 
+        }
+        private bool ComprobarArticulosAsociadosAAutor(int idAutor)
+        {
+            ObservableCollection<Articulo> articulos = database.MostrarArticulos();
+            foreach(Articulo articulo in articulos)
+            {
+                if(articulo.Id == idAutor)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         private void EditarAutor()
         {
-            NombreCrear = AutorSeleccionado.Nombre;
-            NicknameCrear = AutorSeleccionado.Nickname;
-            ImagenAutor = AutorSeleccionado.Imagen;
-            RedSeleccionada = AutorSeleccionado.RedSocial;
-
+            AutorAEditar = new Autor(AutorSeleccionado.Id, AutorSeleccionado.Nombre, AutorSeleccionado.Nickname, AutorSeleccionado.Imagen, AutorSeleccionado.RedSocial);
+            AutorFormulario = AutorAEditar;
+            estaEditando = true;
         }
 
         public void SeleccionarImagenAutor()
@@ -143,10 +138,19 @@ namespace Revista_DigitalV2.Vista_Modelo
         }
         public void GuardarAutor()
         {
-            string imagenAutor = gestionAzureBlobService.GuardarImagenAutor(ImagenSeleccionadaPorUsuario);
-            Autor autor = new Autor(NombreCrear, NicknameCrear, imagenAutor, RedSeleccionada);
-            database.CrearAutor(autor);
-            ListaAutores = database.MostrarAutores();
+            if(estaEditando)
+            {
+                database.EditarAutor(AutorAEditar);
+                ListaAutores = database.MostrarAutores();
+            }
+            else
+            {
+                AutorNuevo = AutorFormulario;
+                Autor autor = new Autor(AutorNuevo.Nombre, AutorNuevo.Nickname, ImagenSeleccionadaPorUsuario, AutorNuevo.RedSocial);
+                database.CrearAutor(autor);
+                ListaAutores = database.MostrarAutores();
+            }
+
         }
     }
 }
