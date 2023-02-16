@@ -101,7 +101,7 @@ namespace Revista_DigitalV2.Servicios
             SqliteCommand comando = conexion.CreateCommand();
 
             Autor autor = new Autor();
-            comando.CommandText = @"SELECT * FROM Autor Where id = "+ idBuscar;
+            comando.CommandText = @"SELECT * FROM Autor Where id = " + idBuscar;
             SqliteDataReader lector = comando.ExecuteReader();
             if (lector.HasRows)
             {
@@ -112,7 +112,7 @@ namespace Revista_DigitalV2.Servicios
                     autor.Imagen = (string)lector["imagen"];
                     autor.RedSocial = (string)lector["red_social"];
                     autor.Id = lector.GetInt32(0);
-                    
+
                 }
             }
             lector.Close();
@@ -123,7 +123,7 @@ namespace Revista_DigitalV2.Servicios
             SqliteCommand comando = conexion.CreateCommand();
 
             Autor autor = new Autor();
-            comando.CommandText = @"SELECT * FROM Autor Where nickname LIKE '%" + nickname+"%'";
+            comando.CommandText = @"SELECT * FROM Autor Where nickname LIKE '%" + nickname + "%'";
             SqliteDataReader lector = comando.ExecuteReader();
             if (lector.HasRows)
             {
@@ -162,6 +162,20 @@ namespace Revista_DigitalV2.Servicios
             }
             lector.Close();
             return listaArticulos;
+        }
+        public bool TituloArticuloExiste(string titulo)
+        {
+            SqliteCommand comando = conexion.CreateCommand();
+
+            ObservableCollection<Articulo> listaArticulos = new ObservableCollection<Articulo>();
+            comando.CommandText = @"SELECT COUNT(titulo) FROM Articulo WHERE titulo LIKE '" + titulo + "'";
+            int cantidad = Convert.ToInt32(comando.ExecuteScalar());
+            if (cantidad > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
         public void EliminarAutor(Autor autor)
         {

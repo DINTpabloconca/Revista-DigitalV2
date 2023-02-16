@@ -40,5 +40,10 @@ namespace Revista_DigitalV2.Servicios
 			MessageBoxResult result = MessageBox.Show("No se ha podido eliminar el autor porque tiene articulos asociados"
 				, "Eliminar autor", MessageBoxButton.OK);
 		}
+		public void DialogoNoSeHaPodidoGuardarArticulo()
+		{
+			MessageBoxResult result = MessageBox.Show("No se ha podido guardar el articulo porque ya existe uno con el mismo título"
+				, "Error al guardar el artículo", MessageBoxButton.OK);
+		}
 	}
 }

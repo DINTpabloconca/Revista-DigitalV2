@@ -15,13 +15,15 @@ namespace Revista_DigitalV2.Vista_Modelo
 {
     class VistaCreacionArticuloVM : ObservableObject
     {
-        public ServicioCreacionArticulo servicioArticulo;
+        private ServicioCreacionArticulo servicioArticulo;
 
-        public GenerarPDFService servicioGenerarPDFService;
+        private GenerarPDFService servicioGenerarPDFService;
 
-        public GestionAzureBlobService servicioPDFAzureService;
+        private GestionAzureBlobService servicioPDFAzureService;
 
-        public DatabaseService servicioDatabaseService;
+        private DatabaseService servicioDatabaseService;
+
+        private DialogoService servicioDialogo;
 
         public RelayCommand AñadirArticuloCommand { get; }
 
@@ -59,6 +61,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         public VistaCreacionArticuloVM()
         {
             // Servicios
+            servicioDialogo = new DialogoService();
             servicioDatabaseService = new DatabaseService();
             servicioArticulo = new ServicioCreacionArticulo();
             servicioGenerarPDFService = new GenerarPDFService();
@@ -80,7 +83,15 @@ namespace Revista_DigitalV2.Vista_Modelo
             //Aquí añadir el artículo a la base de datos
             //Acceder a la base de datos para obtener el id del autor con su nickname
             ArticuloCreado.Autor = servicioDatabaseService.MostrarAutorPorNickname(AutorObjeto).Id;
-            servicioDatabaseService.CrearArticulo(ArticuloCreado);
+            if (!servicioDatabaseService.TituloArticuloExiste(ArticuloCreado.Titulo))
+            {
+                servicioDatabaseService.CrearArticulo(ArticuloCreado);
+                VaciarArticulo();
+            }
+            else
+            {
+                servicioDialogo.DialogoNoSeHaPodidoGuardarArticulo();
+            }
             //La parte de publicar deberia de ir en la vista de administrar articulos
             //Autor nAutor = null;
             //nAutor = servicioDatabaseService.MostrarAutorPorId(ArticuloCreado.Autor);
@@ -88,7 +99,6 @@ namespace Revista_DigitalV2.Vista_Modelo
             //servicioPDFAzureService.SubirPDF(ArticuloCreado);
 
             //Aquí se vuelve a dejar vacío el artículo
-            VaciarArticulo();
 
             // Borrar archivos locales
             //File.Delete("downloadedImage.png");
