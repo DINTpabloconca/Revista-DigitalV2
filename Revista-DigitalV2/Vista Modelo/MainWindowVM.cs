@@ -25,7 +25,6 @@ namespace Revista_DigitalV2.Vista_Modelo
         public MainWindowVM()
         {
             servicioNavegacion = new ServicioNavegacion();
-            generarPaginaService = new GenerarPaginaService();
 
             AbrirCreacionArticuloCommand = new RelayCommand(AbrirCreacionArticulo);
             AbrirVistaAutorCommand = new RelayCommand(AbrirVistaAutor);
