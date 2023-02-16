@@ -27,7 +27,7 @@ namespace Revista_DigitalV2.Servicios
             crearArticulo.CommandText = @"CREATE TABLE IF NOT EXISTS Articulo (
                                         id integer PRIMARY KEY,
                                         autor integer, titulo varchar(100),
-                                        cuerpo text, imagen varchar(500), seccion varchar(50), FOREIGN KEY(autor) REFERENCES Autor(autor))";
+                                        cuerpo text, imagen varchar(500), seccion varchar(50), FOREIGN KEY(autor) REFERENCES Autor(id))";
             crearArticulo.ExecuteNonQuery();
 
         }
@@ -151,7 +151,7 @@ namespace Revista_DigitalV2.Servicios
             {
                 while (lector.Read())
                 {
-                    int autor = (int)lector["autor"];
+                    int autor = lector.GetInt32(1);
                     string titulo = (string)lector["titulo"];
                     string cuerpo = (string)lector["cuerpo"];
                     string imagen = (string)lector["imagen"];

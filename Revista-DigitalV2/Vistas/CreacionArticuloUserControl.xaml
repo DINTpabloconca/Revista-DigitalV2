@@ -82,7 +82,7 @@
         </inputLayout:SfTextInputLayout>
         <StackPanel Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Content="Borrar"  Width="100" Height="20" Margin="5"  Command="{Binding Path=VaciarArticuloCommand}"></Button>
-            <Button Content="Publicar" Width="100" Height="20" Margin="5" Command="{Binding Path=AñadirArticuloCommand}"></Button>
+            <Button Content="Guardar" Width="100" Height="20" Margin="5" Command="{Binding Path=AñadirArticuloCommand}"></Button>
         </StackPanel>
         <Button Grid.Row="7" Grid.Column="0" Content="Cancelar" Height="20" Margin="5"></Button>
 
