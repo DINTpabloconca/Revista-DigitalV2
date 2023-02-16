@@ -31,12 +31,13 @@ namespace Revista_DigitalV2.Vista_Modelo
             set { SetProperty(ref articuloSeleccionado, value); }
         }
 
-        public DatabaseService servicioDatabaseService;
+        private DatabaseService servicioDatabaseService;
+        public DialogoService dialogiService;
 
         public VistaArticuloVM()
         {
             servicioDatabaseService = new DatabaseService();
-
+            dialogiService = new DialogoService();
             ListaArticulos = servicioDatabaseService.MostrarArticulos();
 
             ArticuloSeleccionado = null;
@@ -47,9 +48,13 @@ namespace Revista_DigitalV2.Vista_Modelo
 
         public void EliminarArticulo ()
         {
-            servicioDatabaseService.EliminarArticulo(ArticuloSeleccionado);
-            ListaArticulos.Remove(ArticuloSeleccionado);
-            ArticuloSeleccionado = null;
+            if (dialogiService.DialogoEliminarArticulo())
+            {
+                servicioDatabaseService.EliminarArticulo(ArticuloSeleccionado);
+                ListaArticulos.Remove(ArticuloSeleccionado);
+                ArticuloSeleccionado = null;
+            }
+
         }
         
 

@@ -22,6 +22,19 @@ namespace Revista_DigitalV2.Servicios
 			}
 			return false;
         }
+		public bool DialogoEliminarArticulo()
+		{
+			MessageBoxResult result = MessageBox.Show("¿Seguro que quieres eliminar este articulo?", "Eliminar articulo", MessageBoxButton.YesNo);
+			switch (result)
+			{
+				case MessageBoxResult.Yes:
+					return true;
+
+				case MessageBoxResult.No:
+					return false;
+			}
+			return false;
+		}
 		public void DialogoErrorEliminacion()
 		{
 			MessageBoxResult result = MessageBox.Show("No se ha podido eliminar el autor porque tiene articulos asociados"
