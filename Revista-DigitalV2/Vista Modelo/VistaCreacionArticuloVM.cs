@@ -81,17 +81,18 @@ namespace Revista_DigitalV2.Vista_Modelo
             //Acceder a la base de datos para obtener el id del autor con su nickname
             ArticuloCreado.Autor = servicioDatabaseService.MostrarAutorPorNickname(AutorObjeto).Id;
             servicioDatabaseService.CrearArticulo(ArticuloCreado);
-            Autor nAutor = null;
-            nAutor = servicioDatabaseService.MostrarAutorPorId(ArticuloCreado.Autor);
-            servicioGenerarPDFService.GenerarPdf(ArticuloCreado, nAutor);
-            servicioPDFAzureService.SubirPDF(ArticuloCreado);
+            //La parte de publicar deberia de ir en la vista de administrar articulos
+            //Autor nAutor = null;
+            //nAutor = servicioDatabaseService.MostrarAutorPorId(ArticuloCreado.Autor);
+            //servicioGenerarPDFService.GenerarPdf(ArticuloCreado, nAutor);
+            //servicioPDFAzureService.SubirPDF(ArticuloCreado);
 
             //Aquí se vuelve a dejar vacío el artículo
             VaciarArticulo();
 
             // Borrar archivos locales
-            File.Delete("downloadedImage.png");
-            File.Delete("Articulo.pdf");
+            //File.Delete("downloadedImage.png");
+            //File.Delete("Articulo.pdf");
         }
 
         public void VaciarArticulo()
