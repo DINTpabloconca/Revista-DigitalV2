@@ -32,23 +32,32 @@ namespace Revista_DigitalV2.Vista_Modelo
         }
 
         private DatabaseService servicioDatabaseService;
-        public DialogoService dialogiService;
+        public DialogoService dialogoService;
+        private GenerarPaginaService generarPaginaService;
+        public RelayCommand PublicarArticuloCommand { get; }
 
         public VistaArticuloVM()
         {
             servicioDatabaseService = new DatabaseService();
-            dialogiService = new DialogoService();
+            generarPaginaService = new GenerarPaginaService();
+
+            dialogoService = new DialogoService();
             ListaArticulos = servicioDatabaseService.MostrarArticulos();
 
             ArticuloSeleccionado = null;
             EliminarArticuloCommand = new RelayCommand(EliminarArticulo);
+            PublicarArticuloCommand = new RelayCommand(GeneraPagina);
 
         }
 
+        public void GeneraPagina()
+        {
+            generarPaginaService.GenerarHTML(ListaArticulos);
+        }
 
         public void EliminarArticulo ()
         {
-            if (dialogiService.DialogoEliminarArticulo())
+            if (dialogoService.DialogoEliminarArticulo())
             {
                 servicioDatabaseService.EliminarArticulo(ArticuloSeleccionado);
                 ListaArticulos.Remove(ArticuloSeleccionado);

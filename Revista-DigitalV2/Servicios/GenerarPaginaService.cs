@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Revista_DigitalV2.Servicios
 {
-    class GenerarPáginaService
+    class GenerarPaginaService
     {
         public void GenerarHTML(ObservableCollection<Articulo> articulos)
         {
