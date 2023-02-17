@@ -122,6 +122,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         public void VaciarArticulo()
         {
             ArticuloCreado = new Articulo();
+            AutorObjeto = "";
         }
         public void ExaminarImagen()
         {
