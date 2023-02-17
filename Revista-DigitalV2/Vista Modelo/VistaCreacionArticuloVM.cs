@@ -115,8 +115,8 @@ namespace Revista_DigitalV2.Vista_Modelo
             //Aquí se vuelve a dejar vacío el artículo
 
             // Borrar archivos locales
-            //File.Delete("downloadedImage.png");
-            //File.Delete("Articulo.pdf");
+            File.Delete("downloadedImage.png");
+            File.Delete("Articulo.pdf");
         }
 
         public void VaciarArticulo()
