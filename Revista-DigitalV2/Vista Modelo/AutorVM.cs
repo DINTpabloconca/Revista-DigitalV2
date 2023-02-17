@@ -135,6 +135,7 @@ namespace Revista_DigitalV2.Vista_Modelo
         public void SeleccionarImagenAutor()
         {
             ImagenSeleccionadaPorUsuario = servicioArticulo.ExaminaImagen();
+            AutorFormulario.Imagen = ImagenSeleccionadaPorUsuario;
         }
         public void GuardarAutor()
         {

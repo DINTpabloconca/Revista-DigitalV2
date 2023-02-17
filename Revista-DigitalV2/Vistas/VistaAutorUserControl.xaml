@@ -101,7 +101,7 @@
             Margin="0,0,5,0"
             Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
             Hint="Imagen">
-                <TextBox Text="{Binding Path=ImagenSeleccionadaPorUsuario}" IsReadOnly="True"></TextBox>
+                <TextBox Text="{Binding Path=AutorFormulario.Imagen}" IsReadOnly="True"></TextBox>
             </inputLayout:SfTextInputLayout>
 
 
